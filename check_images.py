@@ -43,7 +43,6 @@ def main():
     # TODO 0: Measures total program runtime by collecting start time
     print('Starting image classifier...')
     start_time = time()
-    sleep(1)
 
     # TODO 1: Define get_input_args function within the file get_input_args.py
     # This function retrieves 3 Command Line Arugments from user as input from
