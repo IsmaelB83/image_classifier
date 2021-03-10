@@ -46,10 +46,10 @@ def get_pet_labels(image_dir):
     items_in_dic = len(results_dic)
     print("\nEmpty Dictionary results_dic - n items=", items_in_dic)
     for f in listdir(image_dir):
-        aux = f.lower().strip().split('_')
+        aux = f.lower().split('_')
         pet_name = ''
         for word in aux:
             if word.isalpha():
                 pet_name += word + ' '
-        results_dic[f] = [pet_name]
+        results_dic[f] = [pet_name.strip()]
     return results_dic
