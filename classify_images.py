@@ -70,6 +70,10 @@ def classify_images(images_dir, results_dic, model):
         image_classification = classifier(images_dir + '/' + key, model)
         image_classification = image_classification.lower().strip()
         value.append(image_classification)
-        aux = image_classification.split(',')
-        value.append(value[0] in aux)
+        aux = [x.strip() for x in image_classification.split(',')]
+
+        if value[0] in aux:
+            value.append(1)
+        else:
+            value.append(0)
     None
