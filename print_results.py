@@ -71,10 +71,18 @@ def print_results(results_dic, results_stats_dic, model,
     print('% Correct Breed: {}'.format(results_stats_dic['pct_correct_breed']))
     print('% Correct "Not-a" Dog: {}'.format(results_stats_dic['pct_correct_notdogs']))
     print('% Match: {}'.format(results_stats_dic['pct_correct_notdogs'] + results_stats_dic['pct_correct_dogs']))
-    if print_incorrect_dogs or print_incorrect_breed:
+    # Incorrect dog classifications
+    if print_incorrect_dogs and (results_stats_dic['n_correct_dogs'] +
+                                 results_stats_dic['n_correct_notdogs'] != results_stats_dic['n_images']):
+        print('Incorrect DOG classifications:')
         for key, value in results_dic.items():
-            if print_incorrect_dogs and (value[3] != value[4]):
-                print('Incorrect DOG classification: {} - {}'.format(key, value))
-            if print_incorrect_breed and (value[3] and value[3] == value[4] and not value[2]):
-                print('Incorrect BREED classification: {} - {}'.format(key, value))
+            if value[3] != value[4]:
+                print('{} - {}'.format(key, value))
+
+    # Incorrect print_incorrect_breed classifications
+    if print_incorrect_dogs and (results_stats_dic['n_correct_dogs'] != results_stats_dic['n_correct_breed']):
+        print('Incorrect BREED classifications:')
+        for key, value in results_dic.items():
+            if value[3] and value[3] == value[4] and not value[2]:
+                print('{} - {}'.format(key, value))
     None
