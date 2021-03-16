@@ -76,8 +76,7 @@ def calculates_results_stats(results_dic):
         # n_dogs_img - number of dog images
         results_stats_dic['n_dogs_img'] += value[3]
         # n_match - number of matches between pet & classifier labels
-        if value[2] and value[3]:
-            results_stats_dic['n_match'] += 1
+        results_stats_dic['n_match'] += value[2]
         # n_correct_dogs - number of correctly classified dog images
         if value[3] and value[4]:
             results_stats_dic['n_correct_dogs'] += 1
@@ -91,9 +90,12 @@ def calculates_results_stats(results_dic):
     results_stats_dic['n_notdogs_img'] = results_stats_dic['n_images'] - results_stats_dic['n_dogs_img']
     # percentages
     results_stats_dic['pct_match'] = results_stats_dic['n_match'] / results_stats_dic['n_images'] * 100
-    results_stats_dic['pct_correct_dogs'] = results_stats_dic['n_correct_dogs'] / results_stats_dic['n_images'] * 100
-    results_stats_dic['pct_correct_breed'] = results_stats_dic['n_correct_breed'] / results_stats_dic['n_images'] * 100
-    results_stats_dic['pct_correct_notdogs'] = results_stats_dic['n_correct_notdogs'] / results_stats_dic[
-        'n_images'] * 100
+    results_stats_dic['pct_correct_dogs'] = results_stats_dic['n_correct_dogs'] / \
+                                            results_stats_dic['n_dogs_img'] * 100
+    results_stats_dic['pct_correct_breed'] = results_stats_dic['n_correct_breed'] / \
+                                             results_stats_dic['n_dogs_img'] * 100
+    results_stats_dic['pct_correct_notdogs'] = results_stats_dic['n_correct_notdogs'] / \
+                                               (results_stats_dic['n_images'] -
+                                                results_stats_dic['n_dogs_img']) * 100
 
     return results_stats_dic

@@ -46,6 +46,9 @@ def get_pet_labels(image_dir):
     items_in_dic = len(results_dic)
     print("\nEmpty Dictionary results_dic - n items=", items_in_dic)
     for f in listdir(image_dir):
+        # Exclude hidden files
+        if f.startswith('.'):
+            continue
         aux = f.lower().split('_')
         pet_name = ''
         for word in aux:
